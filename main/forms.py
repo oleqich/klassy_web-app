@@ -1,3 +1,4 @@
+from django.conf import settings
 from .models import ReserveModel
 from django.forms import ModelForm, TextInput, Select, DateInput, TimeInput, Textarea
 
@@ -32,10 +33,7 @@ class ReserveForm(ModelForm):
                 'class':'form-control',
                 'placeholder':'yyyy-mm-dd',
             }),
-            'time': TimeInput(attrs={
-                'class':'form-control',
-                'placeholder':'hh:mm',
-            }),
+            'time': Select(choices=ReserveModel.TIME_CHOICES),
             'message': Textarea(attrs={
                 'class':'form-control',
                 'placeholder': 'Message',
