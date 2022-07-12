@@ -19,7 +19,8 @@ def reserve(request):
     else:
         form = ReserveForm()
 
-    return render(request, 'main/index.html', {'form':form, 'error':error, 'chefs':chefs, 'dishes':dishes, })
+    return render(request, 'main/index.html', {'form':form, 'error':error,
+                'chefs':chefs, 'dishes':dishes, 'n':[1,2]})
 
 # Create your views here.
 def index(request):
