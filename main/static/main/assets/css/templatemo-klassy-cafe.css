@@ -1409,7 +1409,15 @@ offers
 #offers .tabs-content {
   margin-top: 60px;
   text-align: left;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s;
+}
+#offers .tabs-content .row .column11{
+  margin-top: 60px;
+  text-align: left;
   display: inline-block;
+  float: center;
   transition: all 0.3s;
 }
 #offers .tabs-content .tab-item {
