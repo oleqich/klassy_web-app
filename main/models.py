@@ -1,5 +1,5 @@
-from turtle import position
 from django.db import models
+from django.core.exceptions import ValidationError
 
 class ReserveModel(models.Model):
     NUMBER_CHOICES = (
@@ -31,6 +31,9 @@ class ReserveModel(models.Model):
         verbose_name = 'Reservation'
         verbose_name_plural = 'Reservations'
 
+
+
+
 def chef_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'images/chefs/chef_{0}/{1}'.format(instance.name, filename)
@@ -49,3 +52,30 @@ class ChefsModel(models.Model):
     class Meta:
         verbose_name = 'Chef'
         verbose_name_plural = 'Chefs'
+
+
+
+def dishes_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'images/dishes/dish_{0}/{1}'.format(instance.name, filename)
+
+class DishesModel(models.Model):
+    BREAKFAST, LUNCH, DINNER = 'Breakfast', 'Lunch', 'Dinner'
+    DISH_CHOICES = (
+        (BREAKFAST, 'Breakfast'),
+        (LUNCH, 'Lunch'),
+        (DINNER, 'Dinner'),
+    )
+    name = models.CharField('Name of the dish', max_length=40)
+    description = models.CharField('Desription', max_length=70)
+    price = models.FloatField('Price', blank=False)
+    tabs = models.CharField('Tab', blank=False, default=BREAKFAST, choices=DISH_CHOICES, max_length=9)
+    image = models.ImageField(null=False, blank=False, upload_to=dishes_directory_path, verbose_name='Image')
+
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Dish'
+        verbose_name_plural = 'Dishes'

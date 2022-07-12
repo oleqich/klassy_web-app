@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse
 from .forms import ReserveForm
-from .models import ChefsModel
+from .models import ChefsModel, DishesModel
 
 # Create your views here.
 
 def reserve(request):
     chefs = ChefsModel.objects.all()
+    dishes = DishesModel.objects.all()
     error = ''
     if request.method == 'POST':
         form = ReserveForm(request.POST)
@@ -18,7 +19,7 @@ def reserve(request):
     else:
         form = ReserveForm()
 
-    return render(request, 'main/index.html', {'form':form, 'error':error, 'chefs':chefs})
+    return render(request, 'main/index.html', {'form':form, 'error':error, 'chefs':chefs, 'dishes':dishes, })
 
 # Create your views here.
 def index(request):
