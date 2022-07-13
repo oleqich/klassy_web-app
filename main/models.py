@@ -68,7 +68,8 @@ class DishesModel(models.Model):
     )
     name = models.CharField('Name of the dish', max_length=40)
     description = models.CharField('Desription', max_length=70)
-    price = models.FloatField('Price', blank=False)
+    price = models.DecimalField('Price', max_digits=6, decimal_places=2)
+
     tabs = models.CharField('Tab', blank=False, default=BREAKFAST, choices=DISH_CHOICES, max_length=9)
     image = models.ImageField(null=False, blank=False, upload_to=dishes_directory_path, verbose_name='Image')
 
